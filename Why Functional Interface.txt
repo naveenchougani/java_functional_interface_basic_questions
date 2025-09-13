@@ -1,0 +1,59 @@
+In java, once you create a class with methods, we need object to invoke them or directly if methods are static.
+But what if, you want to sort a list of objects in different ways.
+Basically, we have to add that many methods to satisfy the different conditions. Let us take below example
+
+class Employee                                  // now method to get employee > 18 age                                    // now method to get employee name start with 18
+{  // start of class                             static List<Employee> getGreaterThan18(List<Employee> employees)            static List<Empoyee> getEmpNameWithA(List<Employee> employees) 
+  int salary;                                            {                                                                      {
+  String name;                                                  List<Employee> empGreateThan18=new ArrayList<>();                   List<Employee> empWithA=new ArrayList<>(); 
+                                                                  for(Employee emp:employess) {                                          for(Employee emp:employess) {
+public Employee(int salary,String name)                                      if(emp.getAge()>18) {                                               if(emp.getName().startsWith("A") {       
+  {                                                                                emempGreateThan18.add(emp); }                                      empWithA.add(emp) ; }
+  this.salary=salary;                                                                        }                                                        }      
+  this.name=name;                                          return empGreateThan18;                                                          return empWithA;
+  }                                                      }                                                                       } 
+                                                                                                                              } // end of class
+
+Here we added two different methods for two different requirements. Now assume we have only below Static method only one.
+
+Static List<Employee> filter(List<Employee> emps, Predicate<Employee> condition) 
+  {
+    List<Employee> newList=new ArrayList<>();    
+      for(Employee emp: emps) {
+          if(condition.test(emp) ) {
+                  newList.add(emp) ; }
+                              }
+    return newList;
+  }
+
+Now in other class, where create a list of employees and calling the above function with below two conditions;
+list.add().......
+List<Employee> employees>18 = Employee.filter(list, p->p.getAge()>18) ;
+List<Employee> employeesWithA = Employee.filter(list, p->p.getName().startsWith("A")) ;
+
+// Here compiler is smart enough to infer p refers to Employee as Predicate<Employee> is mentioned
+
+// Here now lambda expression is directly implements the Predication<T> functional interface method test and 
+// compiler provides you the anonymous class that implements the Predicaton FI with above code.
+
+Now the above lambda expression is an impplementation of the FI and passed as variable to the filter method and stored in condition variable
+
+Wbhen you call, condition.test(p), test method is executed which return boolean value. Check below line for clarification.
+
+i.e, p->p.getAge()>18 lambda expression implements the test method of predicate IF i.e, ---?  boolean test(Person p) { return p.getAge()>18: };
+
+and this test method gets executed when you call condition.test(p).
+
+This is how functional interfaces helps to pass the behaviour as parameters, and results in resuablity.
+
+
+
+
+
+
+
+
+
+
+
+
