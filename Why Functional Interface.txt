@@ -48,6 +48,24 @@ This is how functional interfaces helps to pass the behaviour as parameters, and
 
 
 
+Another example...
+
+class Main {
+    public static void main(String[] args) {
+           
+        A add=(a,b)->a+b;  // passing behaviour
+        A sub=(a,b)->a-b;   //resuability
+        
+        System.out.println(add.customCalculation(3,4));
+        System.out.println(sub.customCalculation(5,4));
+   
+    }
+}
+
+interface A
+{
+    int customCalculation(int a,int b);
+}
 
 
 
